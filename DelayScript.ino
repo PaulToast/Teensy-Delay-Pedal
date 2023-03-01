@@ -41,38 +41,35 @@ ILI9341_t3 tft = ILI9341_t3(PIN_TFT_CS, PIN_TFT_DC, PIN_TFT_RST, PIN_TFT_MOSI, P
  * TEENSY AUDIO: DEFINE NODES & CONNECTIONS
  */
 
-// either or
-AudioInputI2S            audioInput;      // stereo input (line)
-//AudioInputUSB            audioInput;      // stereo input (usb)
-
 // nodes
+AudioInputI2S            audioInput;      // stereo input (line)
+AudioOutputI2S           audioOutput;     // stereo output (line)
+AudioControlSGTL5000     sgtl5000;        // audio shield controls
 AudioEffectDelay         delayL;          // L delay
 AudioEffectDelay         delayR;          // R delay
 AudioMixer4              mixerWetnessL;   // L delay mixer (dry / delay)
 AudioMixer4              mixerWetnessR;   // R delay mixer (dry / delay)
 AudioMixer4              mixerFeedbackL;  // L delay mixer (feedback)
 AudioMixer4              mixerFeedbackR;  // R delay mixer (feedback)
-AudioOutputI2S           audioOutput;     // stereo output (line)
-AudioControlSGTL5000     sgtl5000;        // audio shield controls
 
-// L & R input
+// cords - L & R input
 AudioConnection          patchCord1(audioInput, 0, mixerFeedbackL, 0);
 AudioConnection          patchCord2(audioInput, 1, mixerFeedbackR, 0);
 
 AudioConnection          patchCord3(audioInput, 0, mixerWetnessL, 0);
 AudioConnection          patchCord4(audioInput, 1, mixerWetnessR, 0);
 
-// L delay line
+// cords - L delay line
 AudioConnection          patchCord5(mixerFeedbackL, delayL);
 AudioConnection          patchCord6(delayL, 0, mixerFeedbackL, 2);
 AudioConnection          patchCord7(mixerFeedbackL, 0, mixerWetnessL, 2);
 
-// R delay line
+// cords - R delay line
 AudioConnection          patchCord8(mixerFeedbackR, delayR);
 AudioConnection          patchCord9(delayR, 0, mixerFeedbackR, 2);
 AudioConnection          patchCord10(mixerFeedbackR, 0, mixerWetnessR, 2);
 
-// L & R output
+// cords - L & R output
 AudioConnection          patchCord11(mixerWetnessL, 0, audioOutput, 0);
 AudioConnection          patchCord12(mixerWetnessR, 0, audioOutput, 1);
 
@@ -106,20 +103,16 @@ void setup() {
 
   // initialize audio shield
   sgtl5000.enable();
-  //sgtl5000.adcHighPassFilterDisable();
-
-  // start serial output
-  //Serial.begin(9600);
+  sgtl5000.adcHighPassFilterDisable();
+  
+  Serial.begin();
 
   // initialize display
-  /*
   tft.begin();
   tft.setRotation(3);
   tft.fillScreen(ILI9341_BLACK);
   tft.setTextColor(ILI9341_WHITE);
   tft.setTextSize(4);
-
-  tft.print("Hello");
 
   // initialize state variables for stepped rotary encoders
   delayTimeLastState = digitalRead(PIN_DTIME_DT);
@@ -127,7 +120,6 @@ void setup() {
 
   // update all parameters
   updateParameters();
-  */
 }
 
 /*
@@ -136,20 +128,13 @@ void setup() {
 
 void loop() {
   // update all parameters
-  //updateParameters();
-  /*
-  Serial.print("IN: ");
-  Serial.print(volumeIn);
-  Serial.print(", OUT: ");
-  Serial.println(volumeOut);
-  */
+  updateParameters();
 }
 
 /*
- * DECLARE CUSTOM FUNCTIONS
+ * FUNCTIONS
  */
 
-/*
 void updateParameters() {
   // volume in
   volumeIn = analogRead(PIN_VOLUME_IN) / 1024.0;
@@ -209,9 +194,4 @@ void updateParameters() {
   } 
   feedbackLastState = feedbackState;
   
-  // color
-
-  // modulation
-  
 }
-*/
