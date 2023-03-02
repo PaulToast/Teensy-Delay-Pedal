@@ -1,4 +1,4 @@
-# DIY Delay Effect Pedal using the Teensy 4.1
+# Homemade Delay Effect Pedal using the Teensy 4.1
 
 This article details the implementation of a DIY audio effect pedal and provides a step-by-step guide.
 
