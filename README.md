@@ -20,7 +20,7 @@ This article details the implementation of a DIY audio effect pedal and provides
 <a name="project-description"></a>
 ### 1.1 Project
 
-As part of a university project at the [HAW Hamburg](https://www.haw-hamburg.de/), a delay effect pedal for use in music production was developed using the [Teensy](https://www.pjrc.com/teensy/) 4.1 micro-controller, as well as other basic components. Because of the simple setup, it can easily be adjusted for different audio effects. The following guide provides an example that can be modified for different needs.
+As part of a university project at the [HAW Hamburg](https://www.haw-hamburg.de/), a delay effect pedal for use in music production was developed using the [Teensy 4.1](https://www.pjrc.com/teensy/) micro-controller, as well as other basic components. Because of the simple setup, it can easily be adjusted for different audio effects. The following guide provides an example that can be modified for different needs.
 
 XXX describe different article contents and how to use
 
@@ -32,6 +32,7 @@ The audio effect that was chosen for the project is a simple delay effect with s
 - Feedback Decay
 - Color
 - Modulation
+
 Additionally, the following controls are implemented:
 - On/Off (Bypass)
 - Input Volume
@@ -55,25 +56,31 @@ Additionally, the following controls are implemented:
 ### 2.1 Base Components
 
 Base Components that are needed to create the foundational input / output and audio processing:
-- 1 x [Teensy 4.1](https://www.pjrc.com/store/teensy41.html)
-- 1 x [Teensy Audio Shield Rev D](https://www.pjrc.com/store/teensy3_audio.html)
-- 2/4 x 6,3mm TRS Jack (mono/stereo)
-- 3 x Rotary Encoder (limited)
-- 1 x Footswitch
+| Amount    | Component                     |
+| --------- | ----------------------------- |
+| 1         | [Teensy 4.1](https://www.pjrc.com/store/teensy41.html) |
+| 1         | [Teensy Audio Shield Rev D](https://www.pjrc.com/store/teensy3_audio.html) |
+| 2/4       | 6,3mm TRS Jack (mono/stereo)  |
+| 3         | Rotary Encoder (limited)      |
+| 1         | Footswitch                    |
 
 <a name="delay-components"></a>
 ### 2.2 Delay Effect Components
 
 Components for parameter control of the specific Delay Effect:
-- 1 x [Display](https://www.pjrc.com/store/display_ili9341_touch.html)
-- 5 x Rotary Encoder (endless, stepped, with push-in-button)
+| Amount    | Component                     |
+| --------- | ----------------------------- |
+| 1         | [Display](https://www.pjrc.com/store/display_ili9341_touch.html) |
+| 5         | Rotary Encoder (endless, stepped, with push-in-button) |
 
 <a name="baadditionalse-components"></a>
 ### 2.3 Additional Components
 
 Additional Components for polished case housing:
-- 1 x [Custom PCB](#)
-- 1 x [Custom Case](#)
+| Amount    | Component                     |
+| --------- | ----------------------------- |
+| 1         | [Custom PCB](#)               |
+| 1         | [Custom Case](#)              |
 
 **[Back to Top](#toc)**
 
@@ -130,3 +137,5 @@ Für das Projekt wurde folgendes Skript verwendet:
 https://github.com/PaulToast/Teensy-Delay-Pedal/blob/main/DelayScript.ino
 Eigenes Skript erstellen
 Für die Erstellung eines eigenen Skripts wird die Verwendung des Audio System Design Tool for Teensy Audio Library empfohlen. Über das visuelle Interface können Signalwege konfiguriert werden und als Teensyduino Code exportiert werden. Falls Bedienelemente verwendet werden (Dreh-Encoder, etc.), müssen diese anschließend noch im Skript implementiert werden.
+
+**[Back to Top](#toc)**
